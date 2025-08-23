@@ -1,0 +1,82 @@
+/* eslint-disable prettier/prettier */
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const appDirectory = path.resolve(__dirname, '..');
+
+module.exports = {
+  mode: 'development',
+  entry: path.resolve(appDirectory, 'web/index.web.tsx'),
+  output: {
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(appDirectory, 'dist/web'),
+    clean: true,
+    publicPath: '/',
+  },
+  resolve: {
+    extensions: [
+      '.web.tsx',
+      '.web.ts',
+      '.web.js',
+      '.tsx',
+      '.ts',
+      '.js',
+      '.json',
+    ],
+    alias: {
+      'react-native$': 'react-native-web',
+      // ❗️(Tuỳ chọn) MOCK các lib mobile-only để chạy web không crash
+      // Ví dụ Firebase Messaging / Push Notifications / NativeModules tự chế:
+      // '@react-native-firebase/messaging': path.resolve(appDirectory, 'web/mocks/empty.js'),
+      // 'react-native-push-notification': path.resolve(appDirectory, 'web/mocks/empty.js'),
+      'react-native-reanimated': path.resolve(
+        __dirname,
+        'web/fake-reanimated.js',
+      ),
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        include: [
+          path.resolve(appDirectory, 'App.tsx'),
+          path.resolve(appDirectory, 'src'),
+          path.resolve(appDirectory, 'web'),
+          path.resolve(appDirectory, 'node_modules/react-native-vector-icons'),
+          // thêm các node_modules cần transpile nếu cần
+        ],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: [
+              'module:metro-react-native-babel-preset',
+              '@babel/preset-typescript',
+            ],
+          },
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  devServer: {
+    port: 8080,
+    historyApiFallback: true,
+    static: {
+      directory: path.resolve(appDirectory, 'public'), // nếu có
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(appDirectory, 'web/index.html'),
+    }),
+  ],
+};
