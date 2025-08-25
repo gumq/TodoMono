@@ -9,9 +9,9 @@ module.exports = {
   entry: path.resolve(appDirectory, 'web/index.web.tsx'),
   output: {
     filename: 'bundle.[contenthash].js',
-    path: path.resolve(appDirectory, 'dist/web'),
+    path: path.resolve(__dirname, '../dist/web'),
     clean: true,
-    publicPath: isProd ? '/' : '/',
+    publicPath: isProd ? './' : '/',
   },
   resolve: {
     extensions: [
