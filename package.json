@@ -14,7 +14,8 @@
     "web": "webpack serve --config web/webpack.config.js --open",
     "build:web": "webpack --config web/webpack.config.js --mode production",
     "desktop": "cross-env START_URL=file://$PWD/dist/web/index.html electron .",
-    "desktop:dev": "cross-env START_URL=http://localhost:8080 electron .",
+    "desktop:offline": "cross-env START_URL=file://%CD%/dist/web/index.html electron .",
+    "desktop:dev": "cross-env START_URL=https://gumq.github.io/TodoMono/ electron .",
     "build:desktop": "electron-builder",
     "predeploy": "yarn build:web",
     "deploy": "gh-pages -d dist/web",
@@ -45,7 +46,7 @@
     "babel-plugin-react-native-web": "^0.21.1",
     "cross-env": "^10.0.0",
     "electron": "^37.3.1",
-    "electron-builder": "^26.0.19",
+    "electron-builder": "^26.0.12",
     "eslint": "^8.19.0",
     "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.4",
@@ -67,15 +68,14 @@
     },
     "files": [
       "dist/web/**/*",
-      "main.js",
-      "preload.js",
+      "./desktop/main.js",
+      "./desktop/preload.js",
       "package.json"
     ],
     "win": {
       "target": [
         "nsis"
       ],
-      "icon": "build/icon.ico",
       "signAndEditExecutable": false
     },
     "nsis": {

@@ -1,10 +1,13 @@
 const path = require('path');
 const {app, BrowserWindow} = require('electron');
-
-const startUrl =
-  process.env.START_URL ||
-  `file://${path.join(__dirname, 'dist/web/index.html')}`; // chú ý __dirname là nơi exe chạy
-
+const url = require('url');
+// const startUrl =
+//   process.env.START_URL ||
+//   `file://${path.join(__dirname, 'dist/web/index.html')}`;
+const startUrl = 'https://gumq.github.io/TodoMono/';
+console.log('process.env.START_URL', url);
+//   process.env.START_URL ||
+//   url.pathToFileURL(path.join(__dirname, '../dist/web/index.html')).href;
 function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
