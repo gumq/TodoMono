@@ -3,15 +3,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const appDirectory = path.resolve(__dirname, '..');
-
+const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
-  mode: 'development',
+  mode: isProd ? 'production' : 'development',
   entry: path.resolve(appDirectory, 'web/index.web.tsx'),
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(appDirectory, 'dist/web'),
     clean: true,
-    publicPath: '/',
+    publicPath: isProd ? '/TodoMono/' : '/',
   },
   resolve: {
     extensions: [
