@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   title: {fontSize: 24, fontWeight: '700', marginBottom: 12},
   input: {

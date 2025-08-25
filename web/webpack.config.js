@@ -25,14 +25,20 @@ module.exports = {
     ],
     alias: {
       'react-native$': 'react-native-web',
-      // ❗️(Tuỳ chọn) MOCK các lib mobile-only để chạy web không crash
-      // Ví dụ Firebase Messaging / Push Notifications / NativeModules tự chế:
-      // '@react-native-firebase/messaging': path.resolve(appDirectory, 'web/mocks/empty.js'),
-      // 'react-native-push-notification': path.resolve(appDirectory, 'web/mocks/empty.js'),
       'react-native-reanimated': path.resolve(
         __dirname,
         'web/fake-reanimated.js',
       ),
+      '@react-native-firebase/messaging': path.resolve(
+        __dirname,
+        'web/mocks/empty.js',
+      ),
+      'react-native-push-notification': path.resolve(
+        __dirname,
+        'web/mocks/empty.js',
+      ),
+      'react-dom/client': 'react-dom',
+      'react-native-fs': path.resolve(__dirname, 'web/mocks/empty.js'),
     },
   },
   module: {
@@ -53,6 +59,7 @@ module.exports = {
             presets: [
               'module:metro-react-native-babel-preset',
               '@babel/preset-typescript',
+              '@babel/preset-react',
             ],
           },
         },

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "main": "index.js",
+    "homepage": "https://gumq.github.io/TodoMono",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -11,13 +12,15 @@
     "test": "jest",
     "start:web": "tsc -p tsconfig.web.json --noEmit && webpack serve --config web/webpack.config.js",
     "web": "webpack serve --config web/webpack.config.js --open",
-    "web:build": "webpack --config web/webpack.config.js",
+    "build:web": "webpack --config web/webpack.config.js --mode production",
     "desktop": "cross-env START_URL=file://$PWD/dist/web/index.html electron .",
-    "desktop:dev": "cross-env START_URL=http://localhost:8080 electron ."
+    "desktop:dev": "cross-env START_URL=http://localhost:8080 electron .",
+    "predeploy": "yarn build:web",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-dom": "^19.1.1",
+    "react-dom": "18.2.0",
     "react-native": "0.74.5",
     "react-native-reanimated": "^4.0.2",
     "react-native-web": "^0.21.1",
@@ -26,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.28.3",
     "@babel/preset-env": "^7.20.0",
+    "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@babel/runtime": "^7.20.0",
     "@react-native/babel-preset": "0.74.87",
@@ -40,6 +44,7 @@
     "cross-env": "^10.0.0",
     "electron": "^37.3.1",
     "eslint": "^8.19.0",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.4",
     "jest": "^29.6.3",
     "metro-react-native-babel-preset": "^0.77.0",
