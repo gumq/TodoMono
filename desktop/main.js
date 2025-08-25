@@ -1,9 +1,9 @@
-const {app, BrowserWindow} = require('electron');
 const path = require('path');
+const {app, BrowserWindow} = require('electron');
 
-const START_URL =
+const startUrl =
   process.env.START_URL ||
-  `file://${path.join(__dirname, '../dist/web/index.html')}`;
+  `file://${path.join(__dirname, 'dist/web/index.html')}`; // chú ý __dirname là nơi exe chạy
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -14,15 +14,13 @@ function createWindow() {
     },
   });
 
-  win.loadURL(START_URL);
+  win.loadURL(startUrl);
 }
 
-app.whenReady().then(() => {
-  createWindow();
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-});
+app.whenReady().then(createWindow);
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
+});
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
