@@ -11,7 +11,7 @@ module.exports = {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(appDirectory, 'dist/web'),
     clean: true,
-    publicPath: isProd ? '/TodoMono/' : '/',
+    publicPath: isProd ? '/' : '/',
   },
   resolve: {
     extensions: [

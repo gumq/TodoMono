@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "main": "index.js",
-    "homepage": "https://gumq.github.io/TodoMono",
+    "homepage": "https://gumq.github.io/TodoMono/",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -16,7 +16,7 @@
     "desktop": "cross-env START_URL=file://$PWD/dist/web/index.html electron .",
     "desktop:dev": "cross-env START_URL=http://localhost:8080 electron .",
     "predeploy": "yarn build:web",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist/web"
   },
   "dependencies": {
     "react": "18.2.0",
